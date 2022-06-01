@@ -34,5 +34,4 @@ def play_wordle():
     print(ans_idx)
 
 
-pull test
 play_wordle()
