@@ -138,7 +138,7 @@ def play_wordle():
 
         if guess_word.lower() == true_word:
             print('##############################################################')
-            print(f'       HURRAY THE WORD WAS: {true_word.upper()} ')
+            print('       HURRAY THE WORD WAS: {true_word.upper()} ')
             print('##############################################################')
             print('YOU ARE A HUMAN GENIUS! YOU SHOULD BE FEARED AND RESPECTED!!!')
             print('Give yourself a pat on the shoulder :)')
