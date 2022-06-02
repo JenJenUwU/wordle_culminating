@@ -51,10 +51,9 @@ def play_wordle():
         existing = []
         # 'matching' is the letter that matches' number order (0~4)
         matching = np.where(ans_arr == guess_arr)[0]
-        print(len(matching))
+        # print(len(matching))
         # print(matching):
-        if guess_arr in ans_arr:
-            guess_idx[item][2], ans_idx[item][2] = "B", "B"
+
         # append letters that match to 'matched'
         for item in matching:
             matched.append(guess_idx[item][0])
@@ -63,9 +62,10 @@ def play_wordle():
         print(guess_idx)
         print(ans_idx)
 
+        # search for remaining letters that are in wrong position but in the word
         rem_guess = [item for item in guess_idx if item[2] != "A"]
         rem_ans = [item for item in ans_idx if item[2] != "A"]
-        #print(rem_guess, rem_ans)
+        # print(rem_guess, rem_ans)
 
         for guess in rem_guess:
             for ans in rem_ans:
@@ -73,8 +73,27 @@ def play_wordle():
                     if list(ans_arr).count(guess[0]) > (matched.count(guess[0]) + existing.count(guess[0])):
                         existing.append(guess[0])
                         guess[2], ans[2] = 'B', 'B'
+
                     else:
                         continue
+
+        # Create win/fail condition
+        if guess_word.upper() == ans_word.upper():
+            print('##############################################################')
+            print(f'       HURRAY THE WORD WAS: {ans_word.upper()} ')
+            print('##############################################################')
+            print('YOU ARE A HUMAN GENIUS! YOU SHOULD BE FEARED AND RESPECTED!!!')
+            print('Give yourself a pat on the shoulder :)')
+            print("That student debt is finally paying off!!!")
+            print("WANNA PLAY AGAIN?")
+            break
+        else:
+            attempt += 1
+
+            if attempt == 6:
+                print(
+                    f'Sorry, gotta read more BOOKS! The word was {ans_word.upper()}, OBIOUSLY...')
+                break
 
 
 play_wordle()
