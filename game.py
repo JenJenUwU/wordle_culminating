@@ -27,9 +27,7 @@ def ask_user_input(guru=None):
 def play_wordle():
     # Initialize Answer
     ans_word = "Music"
-
     ans_arr = np.array(list(ans_word.upper()))
-
     ans_idx = [[item, idx, None] for idx, item in enumerate(ans_arr)]
     # print(ans_idx)
 
@@ -40,7 +38,6 @@ def play_wordle():
         # Ask User for Input
         guess_word = ask_user_input()
         guess_arr = np.array(list(guess_word.upper()))
-
         guess_idx = [[item, idx, None] for idx, item in enumerate(guess_arr)]
         # print(guess_idx)
 
@@ -54,30 +51,30 @@ def play_wordle():
         existing = []
         # 'matching' is the letter that matches' number order (0~4)
         matching = np.where(ans_arr == guess_arr)[0]
-        # print(matching)
-
+        print(len(matching))
+        # print(matching):
+        if guess_arr in ans_arr:
+            guess_idx[item][2], ans_idx[item][2] = "B", "B"
         # append letters that match to 'matched'
         for item in matching:
             matched.append(guess_idx[item][0])
-            guess_idx[item][2], ans_idx[item][2] = True, True
-
-        print(matched)
+            guess_idx[item][2], ans_idx[item][2] = "A", "A"
+        # print(matched)
         print(guess_idx)
         print(ans_idx)
 
-        rem_guess = [item for item in guess_idx if item[2] != True]
-        rem_ans = [item for item in ans_idx if item[2] != True]
-        print(rem_guess, rem_ans)
+        rem_guess = [item for item in guess_idx if item[2] != "A"]
+        rem_ans = [item for item in ans_idx if item[2] != "A"]
+        #print(rem_guess, rem_ans)
 
         for guess in rem_guess:
             for ans in rem_ans:
                 if guess[0] == ans[0]:
                     if list(ans_arr).count(guess[0]) > (matched.count(guess[0]) + existing.count(guess[0])):
                         existing.append(guess[0])
-                        guess[2], ans[2] = 'EX', 'EX'
+                        guess[2], ans[2] = 'B', 'B'
                     else:
                         continue
-        print(existing)
 
 
 play_wordle()
