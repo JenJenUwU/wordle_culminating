@@ -26,7 +26,7 @@ def ask_user_input(guru=None):
 
 def play_wordle():
     # Initialize Answer
-    ans_word = "Music"
+    ans_word = "hello"
     ans_arr = np.array(list(ans_word.upper()))
     ans_idx = [[item, idx, None] for idx, item in enumerate(ans_arr)]
     # print(ans_idx)
@@ -35,6 +35,8 @@ def play_wordle():
     attempt = 0
 
     while attempt < 6:
+        num_A = 0
+        num_B = 0
         # Ask User for Input
         guess_word = ask_user_input()
         guess_arr = np.array(list(guess_word.upper()))
@@ -47,7 +49,7 @@ def play_wordle():
 
         # 'matched' is the letter that matches
         matched = []
-        #'existing' is...
+        # 'existing' is the letter that is already used for comparison
         existing = []
         # 'matching' is the letter that matches' number order (0~4)
         matching = np.where(ans_arr == guess_arr)[0]
@@ -59,8 +61,8 @@ def play_wordle():
             matched.append(guess_idx[item][0])
             guess_idx[item][2], ans_idx[item][2] = "A", "A"
         # print(matched)
-        print(guess_idx)
-        print(ans_idx)
+        # print(guess_idx)
+        # print(ans_idx)
 
         # search for remaining letters that are in wrong position but in the word
         rem_guess = [item for item in guess_idx if item[2] != "A"]
@@ -77,6 +79,16 @@ def play_wordle():
                     else:
                         continue
 
+        # find the number of B in the guess_idx
+        for item in guess_idx:
+            if item[2] == 'B':
+                num_B += 1
+        # find the number of A in the guess_idx
+        for item in guess_idx:
+            if item[2] == 'A':
+                num_A += 1
+        #print(num_A, num_B)
+
         # Create win/fail condition
         if guess_word.upper() == ans_word.upper():
             print('##############################################################')
@@ -89,10 +101,17 @@ def play_wordle():
             break
         else:
             attempt += 1
+            print('##############################################################')
+            print(f'            Correct Letters in Position: {num_A}')
+            print('##############################################################')
+            print(f'            Correct Letters in Word: {num_B}')
+            print('##############################################################')
+            print(f'            Remaining Attempts: {10-attempt}')
+            print('##############################################################')
 
-            if attempt == 6:
+            if attempt == 10:
                 print(
-                    f'Sorry, gotta read more BOOKS! The word was {ans_word.upper()}, OBIOUSLY...')
+                    f'Sorry, gotta read more BOOKS! The word was obviously {ans_word.upper()}')
                 break
 
 
