@@ -1,8 +1,9 @@
 import numpy as np
-import pandas as pd
-from pandas import DataFrame
-import matplotlib.pyplot as plt
-from IPython.display import display
+#import pandas as pd
+#from pandas import DataFrame
+#import matplotlib.pyplot as plt
+#from IPython.display import display
+from random_word import RandomWords
 
 ################
 #Prep Functions#
@@ -35,8 +36,8 @@ def play_wordle():
     attempt = 0
 
     while attempt < 6:
-        num_A = 0
-        num_B = 0
+        num_G = 0
+        num_Y = 0
         # Ask User for Input
         guess_word = ask_user_input()
         guess_arr = np.array(list(guess_word.upper()))
@@ -59,14 +60,14 @@ def play_wordle():
         # append letters that match to 'matched'
         for item in matching:
             matched.append(guess_idx[item][0])
-            guess_idx[item][2], ans_idx[item][2] = "A", "A"
+            guess_idx[item][2], ans_idx[item][2] = "G", "G"
         # print(matched)
         # print(guess_idx)
         # print(ans_idx)
 
         # search for remaining letters that are in wrong position but in the word
-        rem_guess = [item for item in guess_idx if item[2] != "A"]
-        rem_ans = [item for item in ans_idx if item[2] != "A"]
+        rem_guess = [item for item in guess_idx if item[2] != "G"]
+        rem_ans = [item for item in ans_idx if item[2] != "G"]
         # print(rem_guess, rem_ans)
 
         for guess in rem_guess:
@@ -74,20 +75,20 @@ def play_wordle():
                 if guess[0] == ans[0]:
                     if list(ans_arr).count(guess[0]) > (matched.count(guess[0]) + existing.count(guess[0])):
                         existing.append(guess[0])
-                        guess[2], ans[2] = 'B', 'B'
+                        guess[2], ans[2] = 'Y', 'Y'
 
                     else:
                         continue
 
-        # find the number of B in the guess_idx
+        # find the number of yellows in the guess_idx
         for item in guess_idx:
-            if item[2] == 'B':
-                num_B += 1
-        # find the number of A in the guess_idx
+            if item[2] == 'Y':
+                num_Y += 1
+        # find the number of greens in the guess_idx
         for item in guess_idx:
-            if item[2] == 'A':
-                num_A += 1
-        #print(num_A, num_B)
+            if item[2] == 'G':
+                num_G += 1
+        #print(num_G, num_Y)
 
         # Create win/fail condition
         if guess_word.upper() == ans_word.upper():
@@ -102,9 +103,9 @@ def play_wordle():
         else:
             attempt += 1
             print('##############################################################')
-            print(f'            Correct Letters in Position: {num_A}')
+            print(f'            Correct Letters in Position: {num_G}')
             print('##############################################################')
-            print(f'            Correct Letters in Word: {num_B}')
+            print(f'            Correct Letters in Word: {num_Y}')
             print('##############################################################')
             print(f'            Remaining Attempts: {10-attempt}')
             print('##############################################################')
