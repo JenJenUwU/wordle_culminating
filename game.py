@@ -42,7 +42,7 @@ def ask_user_input(guru=None):
 
 def play_wordle():
     # Initialize Answer
-    ans_word = "hello"
+    ans_word = pick_random_word()
     ans_arr = np.array(list(ans_word.upper()))
     ans_idx = [[item, idx, None] for idx, item in enumerate(ans_arr)]
     # print(ans_idx)
