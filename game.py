@@ -1,9 +1,10 @@
 import numpy as np
+from random_word import RandomWords
 #import pandas as pd
 #from pandas import DataFrame
 #import matplotlib.pyplot as plt
 #from IPython.display import display
-#from random_word import RandomWords
+
 
 ################
 #Prep Functions#
@@ -14,15 +15,14 @@ def pick_random_word():
     # Instantiate randomizer
     r = RandomWords()
 
-    true_word = r.get_random_word(
+    ans_word = r.get_random_word(
         hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective", minDictionaryCount=3, minLength=5, maxLength=5)
 
-    while true_word == None or '-' in true_word:
-        true_word = r.get_random_word(hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective",
-                                      minDictionaryCount=3, minLength=5, maxLength=5).upper()
+    while ans_word == None or '-' in ans_word:
+        ans_word = r.get_random_word(hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective",
+                                     minDictionaryCount=3, minLength=5, maxLength=5).upper()
     else:
-        #         print(f'Word is: {true_word}')
-        return true_word
+        return ans_word
 
 
 def ask_user_input(guru=None):
