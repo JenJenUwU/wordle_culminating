@@ -3,7 +3,7 @@ import numpy as np
 #from pandas import DataFrame
 #import matplotlib.pyplot as plt
 #from IPython.display import display
-from random_word import RandomWords
+#from random_word import RandomWords
 
 ################
 #Prep Functions#
@@ -103,9 +103,9 @@ def play_wordle():
         else:
             attempt += 1
             print('##############################################################')
-            print(f'            Correct Letters in Position: {num_G}')
+            print(f'            Correct Letters in Position: {num_G}' + '🟩')
             print('##############################################################')
-            print(f'            Correct Letters in Word: {num_Y}')
+            print(f'            Correct Letters in Word: {num_Y}' + '🟨')
             print('##############################################################')
             print(f'            Remaining Attempts: {10-attempt}')
             print('##############################################################')
