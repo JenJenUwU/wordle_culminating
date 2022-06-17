@@ -10,6 +10,21 @@ import numpy as np
 ################
 
 
+def pick_random_word():
+    # Instantiate randomizer
+    r = RandomWords()
+
+    true_word = r.get_random_word(
+        hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective", minDictionaryCount=3, minLength=5, maxLength=5)
+
+    while true_word == None or '-' in true_word:
+        true_word = r.get_random_word(hasDictionaryDef="true", includePartOfSpeech="noun,verb,adjective",
+                                      minDictionaryCount=3, minLength=5, maxLength=5).upper()
+    else:
+        #         print(f'Word is: {true_word}')
+        return true_word
+
+
 def ask_user_input(guru=None):
     while True:
         guru = input("Guess a 5-letter Word :")
