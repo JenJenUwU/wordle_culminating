@@ -50,7 +50,7 @@ def play_wordle():
     # Initialize Variables
     attempt = 0
 
-    while attempt < 6:
+    while attempt < 10:
         num_G = 0
         num_Y = 0
         # Ask User for Input
